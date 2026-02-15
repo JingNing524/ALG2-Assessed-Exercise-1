@@ -4,6 +4,8 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
+        // Part 1b
+
         // Load dataset
         int[] original = IntFileReader.readAllInts("Dutch.txt");
 
@@ -29,21 +31,41 @@ public class Main {
         System.out.println("Median sorted? " + isSorted(median3));
         System.out.println("ThreeWay sorted? " + isSorted(threeWay));
 
-        // part 1c
+        // Part 1c
 
         System.out.println();
 
         int[] sizes = { 1000, 2000, 4000, 8000 };
 
         for (int n : sizes) {
+
             int[] killer = KillerInput.generate(n);
 
             long tStart = System.nanoTime();
             Median3QuickSort.sort(killer);
-            long t = System.nanoTime() - tStart;
+            long time = System.nanoTime() - tStart;
 
-            System.out.println("n = " + n + " -> " + t + " ns (" + (t / 1_000_000) + " ms)"
-                    + " | sorted? " + isSorted(killer));
+            System.out.println("n = " + n +
+                    " -> " + (time / 1_000_000) + " ms" +
+                    " | sorted? " + isSorted(killer));
+        }
+
+        // Part 2
+
+        System.out.println();
+
+        // Example dataset (videoId = index)
+        int[] views = { 45, 900, 12, 760, 33, 1500, 499, 888, 1200 };
+
+        int k = 3;
+
+        int[] topVideos = TopKVideos.topK(views, k);
+
+        System.out.println("Top " + k + " most viewed videos:");
+
+        for (int id : topVideos) {
+            System.out.println("Video ID: " + id +
+                    " | Views: " + views[id]);
         }
     }
 
