@@ -28,6 +28,23 @@ public class Main {
         // Safety check
         System.out.println("Median sorted? " + isSorted(median3));
         System.out.println("ThreeWay sorted? " + isSorted(threeWay));
+
+        // part 1c
+
+        System.out.println();
+
+        int[] sizes = { 1000, 2000, 4000, 8000 };
+
+        for (int n : sizes) {
+            int[] killer = KillerInput.generate(n);
+
+            long tStart = System.nanoTime();
+            Median3QuickSort.sort(killer);
+            long t = System.nanoTime() - tStart;
+
+            System.out.println("n = " + n + " -> " + t + " ns (" + (t / 1_000_000) + " ms)"
+                    + " | sorted? " + isSorted(killer));
+        }
     }
 
     private static boolean isSorted(int[] a) {
